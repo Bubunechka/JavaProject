@@ -1,0 +1,19 @@
+syntax = "proto3";
+package com.example.grpc;
+
+message HelloRequest {
+
+  string name = 1; //это тег (целое число). Пересылаемый ключ - единица. Когда на сервере будет приниматься ключ 1, он будет сопоставляться с ключем name
+  repeated string request = 2;
+
+}
+
+//обратно к клиенту
+message HelloResponse{
+  string greeting = 1;
+}
+
+service GreetingService{ //объединяет логически несколько рпс методов
+  rpc greeting(HelloRequest) returns (HelloResponse); //что должен принимать и что должен возвращать
+
+}
