@@ -1,5 +1,6 @@
 package org;
 
+import java.sql.Timestamp;
 import java.util.Arrays;
 
 public abstract class AbstractMemory implements Memorable {
@@ -96,11 +97,57 @@ public abstract class AbstractMemory implements Memorable {
     private double[][] doneMask = new double[bufferSize][];
 
     public void initializeDoneMask() {
-        for (double[] rewards : rewards) {
-            Arrays.fill(rewards, 0.0);
+        for (double[] doneMask : doneMask) {
+            Arrays.fill(doneMask, 0.0);
 
         }
     }
+
+    private double[] timeIntervals;
+    public void initializeTimeIntervals(int bufferSize, double dataType) {
+        this.bufferSize = bufferSize;
+        this.dataType = (char) dataType;
+        this.timeIntervals = new double[bufferSize];
+        Arrays.fill(this.timeIntervals, dataType);
+    }
+
+    private double[][] dateTime = new double[bufferSize][];
+    public void initializeDateTime() {
+        for (double[] dateTime : dateTime) {
+            Arrays.fill(dateTime, 0.0);
+            Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+        }
+    }
+
+    private double[][] currentState = new double[stateSize][dataType];
+    public void initializeCurrentState() {
+        for (double[] currentState : currentState) {
+            Arrays.fill(doneMask, 0.0);
+        }
+    }
+
+    private double[][] previousState = new double [stateSize][dataType];
+
+    public void initializePreviousState(){
+        for(double[] previousState : previousState) {
+            Arrays.fill(previousState, 0.0);
+        }
+    }
+
+//    Что это в проге на питоне? визуальное окно?
+//    self.me_rew_pre = -100500
+//    self.window_norm = 100
+//    self.flag_save_best = False  # ????
+//    self.me_rew = -100500
+
+    private double[][] timeBuffer;
+    public void initializetimeBuffer(int bufferSize) {
+        timeBuffer = new double[bufferSize][3];
+        for(double[] timeBuffer : timeBuffer){
+            Arrays.fill(timeBuffer, 0.0 );
+        }
+    }
+
 
     // вероятно, блоки кода в питоне взаимосвязаны, поэтому написаны раздельно
 
